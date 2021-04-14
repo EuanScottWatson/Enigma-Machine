@@ -3,6 +3,10 @@ import org.junit.jupiter.api.Test
 
 class PlugboardTest {
 
+    companion object {
+        private const val A = 65
+    }
+
     @Test
     fun testCreatingWirings() {
         val plugboard = Plugboard("AB CD EF ZX YW")
@@ -13,15 +17,15 @@ class PlugboardTest {
     @Test
     fun testEncodeDecode() {
         val plugboard = Plugboard("AL FG WE TR PQ")
-        assertEquals(plugboard.encode('A'), 'L')
-        assertEquals(plugboard.encode('L'), 'A')
-        assertEquals(plugboard.encode('E'), 'W')
-        assertEquals(plugboard.encode('W'), 'E')
-        assertEquals(plugboard.encode('X'), 'X')
-        assertEquals(plugboard.encode('Z'), 'Z')
+        assertEquals(plugboard.encode('A'.toInt() - A), 'L'.toInt() - A)
+        assertEquals(plugboard.encode('L'.toInt() - A), 'A'.toInt() - A)
+        assertEquals(plugboard.encode('E'.toInt() - A), 'W'.toInt() - A)
+        assertEquals(plugboard.encode('W'.toInt() - A), 'E'.toInt() - A)
+        assertEquals(plugboard.encode('X'.toInt() - A), 'X'.toInt() - A)
+        assertEquals(plugboard.encode('Z'.toInt() - A), 'Z'.toInt() - A)
 
         assertThrows(Error::class.java) { plugboard.encode(-1) }
-        assertThrows(Error::class.java) { plugboard.encode('a') }
+        assertThrows(Error::class.java) { plugboard.encode('a'.toInt() - A) }
         assertThrows(Error::class.java) { plugboard.encode(1000) }
     }
 

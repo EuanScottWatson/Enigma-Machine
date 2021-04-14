@@ -1,8 +1,9 @@
-class Rotor(private val rotorName: String, private val rotorPos: Int = 0) {
+class Rotor(private val rotorName: String, private var rotorPos: Int = 0) {
 
     private val rotorMapping = createRotorMap()
 
-    private val wiring: MutableList<Int> = decodeRotor(rotorName)
+    private val forward: MutableList<Int> = decodeRotor(rotorName)
+    private val backward = forward.reversed() as MutableList<Int>
 
     companion object {
         private const val A = 65
@@ -34,8 +35,24 @@ class Rotor(private val rotorName: String, private val rotorPos: Int = 0) {
         return wiring
     }
 
+    fun encode(input: Int, map: List<Int>): Int {
+        return map[input]
+    }
+
+    fun forward(value: Int): Int {
+        return encode(value, forward)
+    }
+
+    fun backward(value: Int): Int {
+        return encode(value, backward)
+    }
+
+    fun turn() {
+        this.rotorPos = (this.rotorPos + 1) % 26
+    }
+
     fun getWiring(): MutableList<Int> {
-        return wiring
+        return forward
     }
 
 }

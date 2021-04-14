@@ -1,7 +1,7 @@
 class Plugboard(connections: String) {
 
 
-    private val wirings: MutableList<Int>
+    private val wiring: MutableList<Int>
 
     companion object {
         private const val A = 65
@@ -11,7 +11,7 @@ class Plugboard(connections: String) {
         val pieces = connections.split(" ")
         assert(pieces.isNotEmpty())
         pieces.forEach { assert(it.length == 2) }
-        wirings = decodeWirings(pieces)
+        wiring = decodeWirings(pieces)
     }
 
     private fun identityWirings(): MutableList<Int> {
@@ -47,17 +47,11 @@ class Plugboard(connections: String) {
 
     fun encode(value: Int): Int {
         assert(value in 0..25)
-        return wirings[value]
-    }
-
-    fun encode(value: Char): Char {
-        val ascii = value.toInt() - A
-        assert(ascii in 0..25)
-        return (wirings[ascii] + A).toChar()
+        return wiring[value]
     }
 
     fun getWiring(): MutableList<Int> {
-        return wirings
+        return wiring
     }
 
 }
