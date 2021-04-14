@@ -1,5 +1,5 @@
 
 fun main(args: Array<String>) {
-    val plugboard = Plugboard("AL FG WE TR, PQ")
+    val plugboard = Plugboard("AB CD EF ZX YW")
     println(plugboard.getWiring())
 }
