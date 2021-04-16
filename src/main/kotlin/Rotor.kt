@@ -1,4 +1,4 @@
-class Rotor(private val rotorName: String, private var rotorPos: Int = 0) {
+class Rotor(private val rotorName: String, private var rotorPos: Int = 0, private var notchPos: Int) {
 
     private val rotorMapping = createRotorMap()
 
@@ -36,7 +36,7 @@ class Rotor(private val rotorName: String, private var rotorPos: Int = 0) {
     }
 
     fun encode(input: Int, map: List<Int>): Int {
-        return map[input]
+        return map[(input + rotorPos) % 26]
     }
 
     fun forward(value: Int): Int {
@@ -49,6 +49,10 @@ class Rotor(private val rotorName: String, private var rotorPos: Int = 0) {
 
     fun turn() {
         this.rotorPos = (this.rotorPos + 1) % 26
+    }
+
+    fun atNotch(): Boolean {
+        return this.rotorPos == this.notchPos
     }
 
     fun getWiring(): MutableList<Int> {
