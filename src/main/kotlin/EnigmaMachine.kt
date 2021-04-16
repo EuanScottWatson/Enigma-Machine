@@ -63,7 +63,8 @@ class EnigmaMachine(plugboardSettings: String, rotorWheels: String, reflector: S
 
     fun encodeString(string: String): String {
         val encrypted: MutableList<Char> = mutableListOf()
-        for (letter in string) {
+        val s = string.toUpperCase().replace(" ", "")
+        for (letter in s) {
             encrypted.add(encodeChar(letter))
         }
         return encrypted.joinToString(separator = "")
