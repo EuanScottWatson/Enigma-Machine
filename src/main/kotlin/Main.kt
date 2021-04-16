@@ -1,5 +1,5 @@
 
 fun main(args: Array<String>) {
-    val plugboard = Plugboard("AB CD EF ZX YW")
-    println(plugboard.getWiring())
+    val enigmaMachine = EnigmaMachine("", "III II I", "A")
+    println(enigmaMachine.encodeString("AAAAA"))
 }

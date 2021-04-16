@@ -8,10 +8,13 @@ class Plugboard(connections: String) {
     }
 
     init {
-        val pieces = connections.split(" ")
-        assert(pieces.isNotEmpty())
-        pieces.forEach { assert(it.length == 2) }
-        wiring = decodeWirings(pieces)
+        wiring = if (connections == "") {
+            identityWirings()
+        } else {
+            val pieces = connections.split(" ")
+            pieces.forEach { assert(it.length == 2) }
+            decodeWirings(pieces)
+        }
     }
 
     private fun identityWirings(): MutableList<Int> {

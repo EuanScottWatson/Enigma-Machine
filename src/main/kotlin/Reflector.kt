@@ -20,7 +20,7 @@ class Reflector(choice: String) {
         return wiring
     }
 
-    private fun reflect(c: Int): Int {
+    fun reflect(c: Int): Int {
         return this.wiring[c]
     }
 
