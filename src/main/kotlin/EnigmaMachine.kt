@@ -1,6 +1,6 @@
 class EnigmaMachine(plugboardSettings: String, rotorWheels: String, reflector: String, ring: List<Int>, rotorStart: List<Int>) {
 
-    private val rotorNames = mutableListOf<String>("I", "II", "III", "IV", "V", "VI", "VII", "VIII")
+    private val rotorNames = mutableListOf("I", "II", "III", "IV", "V", "VI", "VII", "VIII")
 
     private val plugboard: Plugboard = Plugboard(plugboardSettings)
 
@@ -20,9 +20,9 @@ class EnigmaMachine(plugboardSettings: String, rotorWheels: String, reflector: S
         assert(names.size == 3)
         names.forEach { assert(rotorNames.contains(it)) }
 
-        rightRotor = Rotor(names[0], rotorStart[0],  ring[0])
+        leftRotor = Rotor(names[0], rotorStart[0],  ring[0])
         middleRotor = Rotor(names[1], rotorStart[1],  ring[1])
-        leftRotor = Rotor(names[2], rotorStart[2],  ring[2])
+        rightRotor = Rotor(names[2], rotorStart[2],  ring[2])
 
     }
 
@@ -44,22 +44,27 @@ class EnigmaMachine(plugboardSettings: String, rotorWheels: String, reflector: S
         val cR1 = rightRotor.forward(cP)
         val cR2 = middleRotor.forward(cR1)
         val cR3 = leftRotor.forward(cR2)
-
         val cRR = reflector.reflect(cR3)
 
-        val cR4 = leftRotor.forward(cRR)
-        val cR5 = middleRotor.forward(cR4)
-        val cR6 = rightRotor.forward(cR5)
+        val cR4 = leftRotor.backward(cRR)
+        val cR5 = middleRotor.backward(cR4)
+        val cR6 = rightRotor.backward(cR5)
 
-        val cFinal = plugboard.encode(cR6)
+        return plugboard.encode(cR6)
+    }
 
-        return cFinal
+    fun intToChar(c: Int): Char {
+        return (c + A).toChar()
+    }
+
+    fun encodeChar(c: Char): Char {
+        return intToChar(forward(c.toInt() - A))
     }
 
     fun encodeString(string: String): String {
         val encrypted: MutableList<Char> = mutableListOf()
         for (letter in string) {
-            encrypted.add((forward(letter.toInt() - A) + A).toChar())
+            encrypted.add(encodeChar(letter))
         }
         return encrypted.joinToString(separator = "")
     }

@@ -54,7 +54,7 @@ class Rotor(private val rotorName: String, private var rotorPos: Int, private va
     }
 
     private fun backwardsRotor(): MutableList<Int> {
-        val wiring = mutableListOf<Int>(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        val wiring = MutableList(26) { 0 }
         for (i in 0..25) {
             wiring[forward[i]] = i
         }
@@ -80,11 +80,19 @@ class Rotor(private val rotorName: String, private var rotorPos: Int, private va
     }
 
     fun atNotch(): Boolean {
-        return this.rotorPos == this.notchPos
+        return if (rotorName == "VI" || rotorName == "VII" || rotorName == "VIII") {
+            this.rotorPos == 12 || this.rotorPos == 25
+        } else {
+            this.rotorPos == this.notchPos
+        }
     }
 
     fun getWiring(): MutableList<Int> {
         return forward
+    }
+
+    fun getInverseWiring(): MutableList<Int> {
+        return backward
     }
 
 }
