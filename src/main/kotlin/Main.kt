@@ -1,5 +1,5 @@
 
 fun main(args: Array<String>) {
-    val enigmaMachine = EnigmaMachine("", "I II III", "A", listOf(1, 1, 1))
+    val enigmaMachine = EnigmaMachine("AD", "I II III", "B", listOf(0, 0, 0), listOf(0, 0, 0))
     println(enigmaMachine.encodeString("AAAAA"))
 }

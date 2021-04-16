@@ -1,4 +1,4 @@
-class EnigmaMachine(plugboardSettings: String, rotorWheels: String, reflector: String, ring: List<Int>) {
+class EnigmaMachine(plugboardSettings: String, rotorWheels: String, reflector: String, ring: List<Int>, rotorStart: List<Int>) {
 
     private val rotorNames = mutableListOf<String>("I", "II", "III", "IV", "V", "VI", "VII", "VIII")
 
@@ -20,9 +20,9 @@ class EnigmaMachine(plugboardSettings: String, rotorWheels: String, reflector: S
         assert(names.size == 3)
         names.forEach { assert(rotorNames.contains(it)) }
 
-        rightRotor = Rotor(names[0], 0, 0, ring[0])
-        middleRotor = Rotor(names[1], 0, 0, ring[1])
-        leftRotor = Rotor(names[2], 0, 0, ring[2])
+        rightRotor = Rotor(names[0], rotorStart[0],  ring[0])
+        middleRotor = Rotor(names[1], rotorStart[1],  ring[1])
+        leftRotor = Rotor(names[2], rotorStart[2],  ring[2])
 
     }
 

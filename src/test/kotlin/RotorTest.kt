@@ -20,8 +20,8 @@ class RotorTest {
     fun checkBackwards() {
         // EKMFLGDQVZNTOWYHXUSPAIBRCJ
         val rotor = Rotor("I", 0, 0)
-        assertEquals(rotor.backward('A'.toInt() - A), 'J'.toInt() - A)
-        assertEquals(rotor.backward('L'.toInt() - A), 'Y'.toInt() - A)
-        assertEquals(rotor.backward('J'.toInt() - A), 'X'.toInt() - A)
+        assertEquals(rotor.backward('E'.toInt() - A), 'A'.toInt() - A)
+        assertEquals(rotor.backward('L'.toInt() - A), 'E'.toInt() - A)
+        assertEquals(rotor.backward('J'.toInt() - A), 'Z'.toInt() - A)
     }
 }
