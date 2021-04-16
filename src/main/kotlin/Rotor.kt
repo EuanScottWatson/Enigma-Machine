@@ -1,4 +1,4 @@
-class Rotor(private val rotorName: String, private var rotorPos: Int = 0, private var notchPos: Int) {
+class Rotor(private val rotorName: String, private var rotorPos: Int, private var notchPos: Int, private var ringPos: Int) {
 
     private val rotorMapping = createRotorMap()
 
@@ -36,7 +36,8 @@ class Rotor(private val rotorName: String, private var rotorPos: Int = 0, privat
     }
 
     fun encode(input: Int, map: List<Int>): Int {
-        return map[(input + rotorPos) % 26]
+        val difference = rotorPos - ringPos
+        return (map[(input + difference + 26) % 26] - difference + 26) % 26
     }
 
     fun forward(value: Int): Int {
